@@ -485,8 +485,12 @@
         </tbody>
         
     </table>
+<!-- Button to download Table in excel form -->
+    <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
 
 
+
+    <!-- javascript code of data Table -->
 
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -496,6 +500,23 @@
         });
     </script>
 
+
+   <!-- javascript code of download the table in Excel formate -->
+
+
+   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script> 
+
+
+   <script>
+   
+   function ExportToExcel(type, fn, dl) {
+          var elt = document.getElementById('example');
+          var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+          return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+            XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+       }
+   </script>
     
 </body>
 </html>
